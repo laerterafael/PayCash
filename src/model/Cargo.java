@@ -11,19 +11,27 @@ import java.util.ArrayList;
  *
  * @author laert
  */
-public class Cargos {
+public class Cargo {
     private int codigo;
     private String nome;
+    private double salario;
     ArrayList <Funcionario> funcionario_list;
 
-    public Cargos() {
-        funcionario_list = new ArrayList ();
+    public Cargo() {
     }
 
-    public Cargos(int codigo, String nome) {
+    public Cargo(int codigo, String nome, double salario) {
         this.codigo = codigo;
         this.nome = nome;
-        funcionario_list = new ArrayList ();
+        this.salario = salario;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
     }
     
     

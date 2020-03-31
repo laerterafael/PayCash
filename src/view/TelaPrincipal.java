@@ -1,5 +1,9 @@
 package view;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.Cargo;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,32 +19,159 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
+    
+    String action = "Padrao";
+    ArrayList<Cargo> ListaCargo = new ArrayList();
+    
     public TelaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        DefaultControlCargo();
+        DefaultControlFunc();
+    }
+    
+    public void LoadTableCargo(){
         
-        //desativar dados funcionarios
-        btn_func_salvar.setEnabled(false);
-        btn_func_cancelar.setEnabled(false);
-        txt_func_codigo.setEnabled(false);
-        txt_func_nome.setEnabled(false);
-        txt_func_cpf.setEnabled(false);
-        txt_func_rg.setEnabled(false);
-        txt_func_data_nascimento.setEnabled(false);
-        txt_func_telefone.setEnabled(false);
-        rb_fem.setEnabled(false);
-        rb_masc.setEnabled(false);
+        DefaultTableModel modelo = new DefaultTableModel(new Object []{"Codigo", "Name","Salário"},0);
         
+        for (int i = 0; i < ListaCargo.size(); i++) {
+            Object linha[] = new Object[]{ListaCargo.get(i).getCodigo(),ListaCargo.get(i).getNome(),ListaCargo.get(i).getSalario()};
+            modelo.addRow(linha);
+        }
+        tbl_cargo.setModel(modelo);
+        tbl_cargo.getColumnModel().getColumn(0).setResizable(false);
+        tbl_cargo.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tbl_cargo.getColumnModel().getColumn(1).setResizable(false);
+        tbl_cargo.getColumnModel().getColumn(2).setResizable(false);
         
-        //desativar dados cargos
-        btn_cargo_cancelar.setEnabled(false);
-        btn_cargo_salvar.setEnabled(false);
-        txt_cargo_codigo.setEnabled(false);
-        txt_cargo_nome.setEnabled(false);
-        txt_cargo_salario.setEnabled(false);
+        LoadCBCargo();
+    }
+    
+    public void LoadCBCargo(){
+        cb_cargo.removeAllItems();
         
+        for (int i = 0; i<ListaCargo.size(); i++) {
+            cb_cargo.addItem(ListaCargo.get(i).getNome());
+        }
+    }
+    
+    public void DefaultControlFunc(){
+        switch(action){
+            case "Padrao" :
+                btn_func_salvar.setEnabled(false);
+                btn_func_novo.setEnabled(true);
+                btn_func_cancelar.setEnabled(false);
+                txt_func_codigo.setEnabled(false);
+                txt_func_nome.setEnabled(false);
+                txt_func_cpf.setEnabled(false);
+                txt_func_rg.setEnabled(false);
+                txt_func_data_nascimento.setEnabled(false);
+                txt_func_telefone.setEnabled(false);
+                rb_fem.setEnabled(false);
+                rb_masc.setEnabled(false);
+                break;
+            
+            case "Novo":
+                btn_func_salvar.setEnabled(true);
+                btn_func_cancelar.setEnabled(true);
+                btn_func_editar.setEnabled(false);
+                btn_func_excluir.setEnabled(false);
+                btn_func_desativar.setEnabled(false);
+                btn_func_novo.setEnabled(false);
+                txt_func_codigo.setEnabled(true);
+                txt_func_nome.setEnabled(true);
+                txt_func_cpf.setEnabled(true);
+                txt_func_rg.setEnabled(true);
+                txt_func_data_nascimento.setEnabled(true);
+                txt_func_telefone.setEnabled(true);
+                rb_fem.setEnabled(true);
+                rb_masc.setEnabled(true);
+                break;
+            
+            case "Salvar":
+                btn_func_salvar.setEnabled(false);
+                btn_func_cancelar.setEnabled(false);
+                btn_func_editar.setEnabled(true);
+                btn_func_excluir.setEnabled(true);
+                btn_func_desativar.setEnabled(true);
+                txt_func_codigo.setEnabled(false);
+                txt_func_nome.setEnabled(false);
+                txt_func_cpf.setEnabled(false);
+                txt_func_rg.setEnabled(false);
+                txt_func_data_nascimento.setEnabled(false);
+                txt_func_telefone.setEnabled(false);
+                rb_fem.setEnabled(false);
+                rb_masc.setEnabled(false);
+                break;
+                    
+        }
     }
 
+    public void DefaultControlCargo(){
+        switch(action){
+            case "Padrao" :
+                btn_cargo_salvar.setEnabled(false);
+                btn_cargo_cancelar.setEnabled(false);
+                btn_cargo_editar.setEnabled(false);
+                btn_cargo_excluir.setEnabled(false);
+                btn_cargo_novo.setEnabled(true);
+                btn_cargo_desativar.setEnabled(false);
+                txt_cargo_codigo.setEnabled(false);
+                txt_cargo_nome.setEnabled(false);
+                txt_cargo_salario.setEnabled(false);
+                break;
+            
+            case "Novo":
+                btn_cargo_salvar.setEnabled(true);
+                btn_cargo_cancelar.setEnabled(true);
+                btn_cargo_editar.setEnabled(false);
+                btn_cargo_excluir.setEnabled(false);
+                btn_cargo_desativar.setEnabled(false);
+                btn_cargo_novo.setEnabled(false);
+                txt_cargo_codigo.setEnabled(true);
+                txt_cargo_nome.setEnabled(true);
+                txt_cargo_salario.setEnabled(true);
+                break;
+            
+            case "Salvar":
+                btn_cargo_salvar.setEnabled(false);
+                btn_cargo_cancelar.setEnabled(false);
+                btn_cargo_editar.setEnabled(false);
+                btn_cargo_excluir.setEnabled(false);
+                btn_cargo_desativar.setEnabled(false);
+                btn_cargo_novo.setEnabled(true);
+                txt_cargo_codigo.setEnabled(false);
+                txt_cargo_nome.setEnabled(false);
+                txt_cargo_salario.setEnabled(false);
+                break;
+            
+            case "Editar":
+                btn_cargo_salvar.setEnabled(true);
+                btn_cargo_cancelar.setEnabled(true);
+                btn_cargo_editar.setEnabled(false);
+                btn_cargo_excluir.setEnabled(false);
+                btn_cargo_desativar.setEnabled(false);
+                btn_cargo_novo.setEnabled(false);
+                txt_cargo_codigo.setEnabled(true);
+                txt_cargo_nome.setEnabled(true);
+                txt_cargo_salario.setEnabled(true);
+                break;
+            
+            case "Selecao":
+                btn_cargo_salvar.setEnabled(false);
+                btn_cargo_cancelar.setEnabled(false);
+                btn_cargo_editar.setEnabled(true);
+                btn_cargo_excluir.setEnabled(true);
+                btn_cargo_desativar.setEnabled(true);
+                btn_cargo_novo.setEnabled(true);
+                txt_cargo_codigo.setEnabled(false);
+                txt_cargo_nome.setEnabled(false);
+                txt_cargo_salario.setEnabled(false);
+                break;
+             
+                    
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,13 +206,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         rb_fem = new javax.swing.JRadioButton();
         txt_func_data_nascimento = new javax.swing.JTextField();
         txt_func_telefone = new javax.swing.JTextField();
+        cb_cargo = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
         btn_func_novo = new javax.swing.JButton();
         btn_func_editar = new javax.swing.JButton();
         btn_func_desativar = new javax.swing.JButton();
         btn_func_excluir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_func1 = new javax.swing.JTable();
+        tbl_cargo = new javax.swing.JTable();
         btn_cargo_novo = new javax.swing.JButton();
         btn_cargo_editar = new javax.swing.JButton();
         btn_cargo_desativar = new javax.swing.JButton();
@@ -125,11 +258,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGap(0, 537, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addGap(0, 451, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -153,10 +286,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tbl_func.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Nome", "CPF", "Função"
@@ -184,9 +314,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tbl_func.getColumnModel().getColumn(1).setResizable(false);
             tbl_func.getColumnModel().getColumn(2).setResizable(false);
             tbl_func.getColumnModel().getColumn(2).setPreferredWidth(20);
-            tbl_func.getColumnModel().getColumn(2).setHeaderValue("CPF");
             tbl_func.getColumnModel().getColumn(3).setResizable(false);
-            tbl_func.getColumnModel().getColumn(3).setHeaderValue("Função");
         }
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados"));
@@ -239,6 +367,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         bg_sexo.add(rb_fem);
         rb_fem.setText("Feminino");
 
+        jLabel11.setText("Cargo:");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -246,30 +376,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addGap(91, 91, 91)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txt_func_rg, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_func_cpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_func_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_func_nome)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txt_func_telefone, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
-                                        .addComponent(rb_masc)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rb_fem)))
+                                .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_func_rg, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(txt_func_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -277,6 +399,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_func_cancelar)
                 .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(txt_func_telefone))
+                        .addGap(5, 5, 5))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(rb_masc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rb_fem)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,25 +438,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_func_rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(rb_masc)
                     .addComponent(rb_fem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_func_cancelar)
                     .addComponent(btn_func_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -347,7 +495,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btn_func_novo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -376,12 +524,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jTabbedPane6.addTab("Funcionários", jPanel3);
 
-        tbl_func1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_cargo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Codigo", "Nome", "Salário"
@@ -402,12 +547,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbl_func1);
-        if (tbl_func1.getColumnModel().getColumnCount() > 0) {
-            tbl_func1.getColumnModel().getColumn(0).setResizable(false);
-            tbl_func1.getColumnModel().getColumn(0).setPreferredWidth(5);
-            tbl_func1.getColumnModel().getColumn(1).setResizable(false);
-            tbl_func1.getColumnModel().getColumn(2).setResizable(false);
+        tbl_cargo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_cargoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbl_cargo);
+        if (tbl_cargo.getColumnModel().getColumnCount() > 0) {
+            tbl_cargo.getColumnModel().getColumn(0).setResizable(false);
+            tbl_cargo.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tbl_cargo.getColumnModel().getColumn(1).setResizable(false);
+            tbl_cargo.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btn_cargo_novo.setText("Novo");
@@ -431,6 +581,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btn_cargo_excluir.setMaximumSize(new java.awt.Dimension(75, 23));
         btn_cargo_excluir.setMinimumSize(new java.awt.Dimension(75, 23));
         btn_cargo_excluir.setPreferredSize(new java.awt.Dimension(75, 23));
+        btn_cargo_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cargo_excluirActionPerformed(evt);
+            }
+        });
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados"));
 
@@ -510,7 +665,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_cargo_novo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -534,7 +689,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btn_cargo_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPane6.addTab("Cargos", jPanel1);
@@ -615,33 +770,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txt_cargo_codigo.setText("");
         txt_cargo_nome.setText("");
         txt_cargo_salario.setText("");
-        
-        txt_cargo_codigo.setEnabled(false);
-        txt_cargo_nome.setEnabled(false);
-        txt_cargo_salario.setEnabled(false);
-        btn_cargo_salvar.setEnabled(false);
-        btn_cargo_cancelar.setEnabled(false);
+        action = "Padrao";
+        DefaultControlCargo();
         
     }//GEN-LAST:event_btn_cargo_cancelarActionPerformed
 
     private void btn_cargo_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargo_salvarActionPerformed
+        int cod = Integer.parseInt(txt_cargo_codigo.getText());
+        String nome = txt_cargo_nome.getText();
+        double salario = Double.parseDouble(txt_cargo_salario.getText());
+        
+        if (action.equals("Novo")) {
+            Cargo cargo = new Cargo(cod,nome,salario);
+            ListaCargo.add(cargo);
+        }else if(action.equals("Editar")){
+            int index = tbl_cargo.getSelectedRow();
+            ListaCargo.get(index).setCodigo(cod);
+            ListaCargo.get(index).setNome(nome);
+            ListaCargo.get(index).setSalario(salario);
+                   
+        }
+        
+        LoadTableCargo();
+        
         txt_cargo_codigo.setText("");
         txt_cargo_nome.setText("");
         txt_cargo_salario.setText("");
-        
-        txt_cargo_codigo.setEnabled(false);
-        txt_cargo_nome.setEnabled(false);
-        txt_cargo_salario.setEnabled(false);
-        btn_cargo_salvar.setEnabled(false);
-        btn_cargo_cancelar.setEnabled(false);
+        action = "Salvar";
+        DefaultControlCargo();
     }//GEN-LAST:event_btn_cargo_salvarActionPerformed
 
     private void btn_cargo_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargo_editarActionPerformed
-        txt_cargo_codigo.setEnabled(true);
-        txt_cargo_nome.setEnabled(true);
-        txt_cargo_salario.setEnabled(true);
-        btn_cargo_salvar.setEnabled(true);
-        btn_cargo_cancelar.setEnabled(true);
+        action = "Editar";
+        DefaultControlCargo();
         
     }//GEN-LAST:event_btn_cargo_editarActionPerformed
 
@@ -649,27 +810,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txt_cargo_codigo.setText("");
         txt_cargo_nome.setText("");
         txt_cargo_salario.setText("");
-        
-        txt_cargo_codigo.setEnabled(true);
-        txt_cargo_nome.setEnabled(true);
-        txt_cargo_salario.setEnabled(true);
-        btn_cargo_salvar.setEnabled(true);
-        btn_cargo_cancelar.setEnabled(true);
+        action = "Novo";
+        DefaultControlCargo();
         
     }//GEN-LAST:event_btn_cargo_novoActionPerformed
 
     private void btn_func_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_editarActionPerformed
-        // TODO add your handling code here:
-        if (tbl_func.isShowing()) {
-
-        } else {
-        }
-        btn_func_salvar.setEnabled(true);
-        btn_func_cancelar.setEnabled(true);
+        action = "Editar";
+        DefaultControlFunc();
     }//GEN-LAST:event_btn_func_editarActionPerformed
 
     private void btn_func_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_novoActionPerformed
-        // TODO add your handling code here:
         txt_func_codigo.setText("");
         txt_func_nome.setText("");
         txt_func_cpf.setText("");
@@ -678,18 +829,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txt_func_telefone.setText("");
         bg_sexo.clearSelection();
 
-        btn_func_salvar.setEnabled(true);
-        btn_func_cancelar.setEnabled(true);
-        
-        txt_func_codigo.setEnabled(true);
-        txt_func_nome.setEnabled(true);
-        txt_func_cpf.setEnabled(true);
-        txt_func_rg.setEnabled(true);
-        txt_func_data_nascimento.setEnabled(true);
-        txt_func_telefone.setEnabled(true);
-        rb_fem.setEnabled(true);
-        rb_masc.setEnabled(true);
-
+        action = "Novo";
+        DefaultControlFunc();
     }//GEN-LAST:event_btn_func_novoActionPerformed
 
     private void rb_mascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_mascActionPerformed
@@ -701,23 +842,55 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_func_codigoActionPerformed
 
     private void btn_func_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_salvarActionPerformed
-        // TODO add your handling code here:
+        txt_func_codigo.setText("");
+        txt_func_nome.setText("");
+        txt_func_cpf.setText("");
+        txt_func_rg.setText("");
+        txt_func_data_nascimento.setText("");
+        txt_func_telefone.setText("");
+        bg_sexo.clearSelection();
 
+        action = "Salvar";
+        DefaultControlFunc();
     }//GEN-LAST:event_btn_func_salvarActionPerformed
 
     private void btn_func_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_cancelarActionPerformed
-         //desativar dados funcionarios
-        btn_func_salvar.setEnabled(false);
-        btn_func_cancelar.setEnabled(false);
-        txt_func_codigo.setEnabled(false);
-        txt_func_nome.setEnabled(false);
-        txt_func_cpf.setEnabled(false);
-        txt_func_rg.setEnabled(false);
-        txt_func_data_nascimento.setEnabled(false);
-        txt_func_telefone.setEnabled(false);
-        rb_fem.setEnabled(false);
-        rb_masc.setEnabled(false);
+        txt_func_codigo.setText("");
+        txt_func_nome.setText("");
+        txt_func_cpf.setText("");
+        txt_func_rg.setText("");
+        txt_func_data_nascimento.setText("");
+        txt_func_telefone.setText("");
+        bg_sexo.clearSelection();
+
+        action = "Padrao";
+        DefaultControlFunc();
     }//GEN-LAST:event_btn_func_cancelarActionPerformed
+
+    private void tbl_cargoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_cargoMouseClicked
+        int index = tbl_cargo.getSelectedRow();
+        if (index>=0 & index<ListaCargo.size()){
+            Cargo c = ListaCargo.get(index);
+            txt_cargo_codigo.setText(String.valueOf(c.getCodigo()));
+            txt_cargo_nome.setText(c.getNome());
+            txt_cargo_salario.setText(String.valueOf(c.getSalario()));
+        }
+        
+        action = "Selecao";
+        
+        
+        DefaultControlCargo();
+    }//GEN-LAST:event_tbl_cargoMouseClicked
+
+    private void btn_cargo_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargo_excluirActionPerformed
+        int index = tbl_cargo.getSelectedRow();
+        if (index>=0 & index<ListaCargo.size()){
+            ListaCargo.remove(index);
+        }
+        LoadTableCargo();
+        action = "Padrao";
+        DefaultControlCargo();
+    }//GEN-LAST:event_btn_cargo_excluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -768,8 +941,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_func_excluir;
     private javax.swing.JButton btn_func_novo;
     private javax.swing.JButton btn_func_salvar;
+    private javax.swing.JComboBox<String> cb_cargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -807,8 +982,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JRadioButton rb_fem;
     private javax.swing.JRadioButton rb_masc;
+    private javax.swing.JTable tbl_cargo;
     private javax.swing.JTable tbl_func;
-    private javax.swing.JTable tbl_func1;
     private javax.swing.JTextField txt_cargo_codigo;
     private javax.swing.JTextField txt_cargo_nome;
     private javax.swing.JTextField txt_cargo_salario;
