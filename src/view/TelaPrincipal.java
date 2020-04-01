@@ -1,9 +1,5 @@
 package view;
 
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-import model.Cargo;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,10 +16,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form TelaPrincipal
      */
     
+    private boolean logado = false;
+    
     
     public TelaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        Logado(false);
+        
+    }
+    
+    public void Logado(boolean l){
+        if(l){
+            MenuCadastro.setEnabled(true);
+            MenuConfig.setEnabled(true);
+            MenuRelatorio.setEnabled(true);
+        }else{
+            MenuCadastro.setEnabled(false);
+            MenuConfig.setEnabled(false);
+            MenuRelatorio.setEnabled(false);
+        }
+        
     }
     
     /**
@@ -38,26 +51,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jdpprincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuArquivo = new javax.swing.JMenu();
+        menuLogin = new javax.swing.JMenuItem();
+        menuSair = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         MenuCadastro = new javax.swing.JMenu();
         menuUsuario = new javax.swing.JMenuItem();
         menuFuncionario = new javax.swing.JMenuItem();
         menuCargo = new javax.swing.JMenuItem();
         MenuRelatorio = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        menuGeral = new javax.swing.JMenuItem();
+        menuPagamentos = new javax.swing.JMenuItem();
+        menuFuncionarios = new javax.swing.JMenuItem();
+        menuFuncoes = new javax.swing.JMenuItem();
         MenuConfig = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        menuBancoDeDados = new javax.swing.JMenuItem();
+        menuConfigGeral = new javax.swing.JMenuItem();
         MenuAjuda = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PayCash - Sistema de Pagamentos");
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jdpprincipal.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
         jdpprincipal.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -75,17 +88,40 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuArquivo.setText("Arquivo");
 
-        jMenuItem1.setText("Salvar");
-        MenuArquivo.add(jMenuItem1);
+        menuLogin.setText("Login");
+        menuLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLoginActionPerformed(evt);
+            }
+        });
+        MenuArquivo.add(menuLogin);
 
-        jMenuItem10.setText("Sair");
-        MenuArquivo.add(jMenuItem10);
+        menuSair.setText("Sair");
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
+        MenuArquivo.add(menuSair);
+
+        jMenuItem1.setText("Fechar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        MenuArquivo.add(jMenuItem1);
 
         jMenuBar1.add(MenuArquivo);
 
         MenuCadastro.setText("Cadastro");
 
         menuUsuario.setText("Cadastrar Usuário");
+        menuUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUsuarioActionPerformed(evt);
+            }
+        });
         MenuCadastro.add(menuUsuario);
 
         menuFuncionario.setText("Cadastrar Funcionário");
@@ -108,34 +144,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuRelatorio.setText("Relatórios");
 
-        jMenuItem5.setText("Geral");
-        MenuRelatorio.add(jMenuItem5);
+        menuGeral.setText("Geral");
+        MenuRelatorio.add(menuGeral);
 
-        jMenuItem6.setText("Pagamentos");
-        MenuRelatorio.add(jMenuItem6);
+        menuPagamentos.setText("Pagamentos");
+        MenuRelatorio.add(menuPagamentos);
 
-        jMenuItem3.setText("Funcionários");
-        MenuRelatorio.add(jMenuItem3);
+        menuFuncionarios.setText("Funcionários");
+        MenuRelatorio.add(menuFuncionarios);
 
-        jMenuItem4.setText("Funções");
-        MenuRelatorio.add(jMenuItem4);
+        menuFuncoes.setText("Funções");
+        MenuRelatorio.add(menuFuncoes);
 
         jMenuBar1.add(MenuRelatorio);
 
         MenuConfig.setText("Configuração");
 
-        jMenuItem11.setText("Banco de Dados");
-        MenuConfig.add(jMenuItem11);
+        menuBancoDeDados.setText("Banco de Dados");
+        MenuConfig.add(menuBancoDeDados);
 
-        jMenuItem12.setText("Geral");
-        MenuConfig.add(jMenuItem12);
+        menuConfigGeral.setText("Geral");
+        MenuConfig.add(menuConfigGeral);
 
         jMenuBar1.add(MenuConfig);
 
         MenuAjuda.setText("Ajuda");
 
-        jMenuItem2.setText("Sobre");
-        MenuAjuda.add(jMenuItem2);
+        menuSobre.setText("Sobre");
+        MenuAjuda.add(menuSobre);
 
         jMenuBar1.add(MenuAjuda);
 
@@ -168,6 +204,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_menuFuncionarioActionPerformed
 
+    private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
+        CadastroUsuario obj = new CadastroUsuario();
+        jdpprincipal.add(obj);
+        obj.setVisible(true);
+    }//GEN-LAST:event_menuUsuarioActionPerformed
+
+    private void menuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
+        new TelaLogin().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menuLoginActionPerformed
+
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+        this.Logado(false);
+    }//GEN-LAST:event_menuSairActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -198,7 +253,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                new TelaLogin().setVisible(true);
             }
         });
     }
@@ -211,17 +266,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuRelatorio;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JDesktopPane jdpprincipal;
+    private javax.swing.JMenuItem menuBancoDeDados;
     private javax.swing.JMenuItem menuCargo;
+    private javax.swing.JMenuItem menuConfigGeral;
     private javax.swing.JMenuItem menuFuncionario;
+    private javax.swing.JMenuItem menuFuncionarios;
+    private javax.swing.JMenuItem menuFuncoes;
+    private javax.swing.JMenuItem menuGeral;
+    private javax.swing.JMenuItem menuLogin;
+    private javax.swing.JMenuItem menuPagamentos;
+    private javax.swing.JMenuItem menuSair;
+    private javax.swing.JMenuItem menuSobre;
     private javax.swing.JMenuItem menuUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/laert/Documents/NetBeansProjects/PayCash/src/model/Usuario.java</file>
+            <file>file:/C:/Users/laert/Documents/NetBeansProjects/PayCash/src/view/CadastroFuncionarios.java</file>
             <file>file:/C:/Users/laert/Documents/NetBeansProjects/PayCash/src/view/TelaPrincipal.java</file>
-            <file>file:/C:/Users/laert/Documents/NetBeansProjects/PayCash/src/model/Cargos.java</file>
-            <file>file:/C:/Users/laert/Documents/NetBeansProjects/PayCash/src/model/Funcionario.java</file>
+            <file>file:/C:/Users/laert/Documents/NetBeansProjects/PayCash/src/view/CadastroCargos.java</file>
         </group>
     </open-files>
 </project-private>

@@ -95,6 +95,9 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tbl_func);
+        if (tbl_func.getColumnModel().getColumnCount() > 0) {
+            tbl_func.getColumnModel().getColumn(0).setPreferredWidth(5);
+        }
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -328,6 +331,7 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
 
     public void LoadCBCargo(){
         cb_cargo.removeAllItems();
+        cb_cargo.addItem("Selecione");
         
         for (int i = 0; i<cc.ListaCargo.size(); i++) {
             cb_cargo.addItem(cc.ListaCargo.get(i).getNome());
