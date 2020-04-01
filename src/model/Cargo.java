@@ -5,17 +5,16 @@
  */
 package model;
 
-import java.util.ArrayList;
 
 /**
  *
  * @author laert
  */
 public class Cargo {
+    private int id;
     private int codigo;
     private String nome;
     private double salario;
-    ArrayList <Funcionario> funcionario_list;
 
     public Cargo() {
     }
@@ -25,6 +24,21 @@ public class Cargo {
         this.nome = nome;
         this.salario = salario;
     }
+    
+    public Cargo(int id, int codigo, String nome, double salario) {
+        this.id = id;
+        this.codigo = codigo;
+        this.nome = nome;
+        this.salario = salario;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public double getSalario() {
         return salario;
@@ -33,8 +47,6 @@ public class Cargo {
     public void setSalario(double salario) {
         this.salario = salario;
     }
-    
-    
 
     public int getCodigo() {
         return codigo;
@@ -51,14 +63,4 @@ public class Cargo {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public ArrayList<Funcionario> getFuncionario_list() {
-        return funcionario_list;
-    }
-
-    public void setFuncionario_list(ArrayList<Funcionario> funcionario_list) {
-        this.funcionario_list = funcionario_list;
-    }
-    
-    
 }

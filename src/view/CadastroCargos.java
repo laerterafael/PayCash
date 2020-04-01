@@ -6,8 +6,11 @@
 package view;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.Cargo;
+import model.dao.CargoDAO;
 
 /**
  *
@@ -23,6 +26,9 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     
     public CadastroCargos() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) tbl_cargo.getModel();
+        tbl_cargo.setRowSorter(new TableRowSorter(modelo));
+        LoadTableCargo();
         Botoes(true, false, false, false, false);
         Campos(false);
     }
@@ -62,16 +68,9 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
                 "Codigo", "Nome", "Salário"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -80,6 +79,11 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         tbl_cargo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_cargoMouseClicked(evt);
+            }
+        });
+        tbl_cargo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tbl_cargoKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(tbl_cargo);
@@ -214,19 +218,19 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void LoadTableCargo(){
-        
-        DefaultTableModel modelo = new DefaultTableModel(new Object []{"Codigo", "Nome", "Salário"},0);
-        
-        for (int i = 0; i < ListaCargo.size(); i++) {
-            Object linha[] = new Object[]{ListaCargo.get(i).getCodigo(),ListaCargo.get(i).getNome(),ListaCargo.get(i).getSalario()};
-            modelo.addRow(linha);
+        DefaultTableModel modelo = (DefaultTableModel) tbl_cargo.getModel();
+        modelo.setNumRows(0);
+        CargoDAO cdao = new CargoDAO();
+
+        for (Cargo c: cdao.read()) {
+            modelo.addRow(new Object[]{
+                c.getCodigo(),
+                c.getNome(),
+                c.getSalario(),
+            });
+
         }
-        tbl_cargo.setModel(modelo);
-        tbl_cargo.getColumnModel().getColumn(0).setResizable(false);
-        tbl_cargo.getColumnModel().getColumn(0).setPreferredWidth(5);
-        tbl_cargo.getColumnModel().getColumn(1).setResizable(false);
-        tbl_cargo.getColumnModel().getColumn(2).setResizable(false);
-        
+ 
     }
     
     public void Botoes(boolean N, boolean E, boolean D, boolean S, boolean C){
@@ -244,12 +248,11 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     }
     
     private void tbl_cargoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_cargoMouseClicked
-        int index = tbl_cargo.getSelectedRow();
-        if (index>=0 & index<ListaCargo.size()){
-            Cargo c = ListaCargo.get(index);
-            txt_cargo_codigo.setText(String.valueOf(c.getCodigo()));
-            txt_cargo_nome.setText(c.getNome());
-            txt_cargo_salario.setText(String.valueOf(c.getSalario()));
+
+        if (tbl_cargo.getSelectedRow() != -1) {
+            txt_cargo_codigo.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0).toString());
+            txt_cargo_nome.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),1).toString());
+            txt_cargo_salario.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),2).toString());
         }
         Botoes(false, true, true, false, false);
     }//GEN-LAST:event_tbl_cargoMouseClicked
@@ -270,27 +273,39 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int index = tbl_cargo.getSelectedRow();
-        if (index>=0 & index<ListaCargo.size()){
-            ListaCargo.remove(index);
+
+        if (tbl_cargo.getSelectedRow() != -1) {
+            Cargo c = new Cargo();
+            CargoDAO dao = new CargoDAO();
+            c.setId((int)tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0));
+            
+            dao.delete(c);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item para excluir.");
         }
+        
+        txt_cargo_codigo.setText("");
+        txt_cargo_nome.setText("");
+        txt_cargo_salario.setText("");
+        
         LoadTableCargo();
         Botoes(true, false, false, false, false);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        int cod = Integer.parseInt(txt_cargo_codigo.getText());
-        String nome = txt_cargo_nome.getText();
-        double salario = Double.parseDouble(txt_cargo_salario.getText());
-
+        
+        Cargo c = new Cargo();
+        CargoDAO dao = new CargoDAO();
+        c.setId((int)tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0));
+        c.setCodigo(Integer.parseInt(txt_cargo_codigo.getText()));
+        c.setNome(txt_cargo_nome.getText());
+        c.setSalario(Double.parseDouble(txt_cargo_salario.getText()));
+        
         if (action.equals("Novo")) {
-            Cargo cargo = new Cargo(cod,nome,salario);
-            ListaCargo.add(cargo);
+            dao.create(c);
         }else if(action.equals("Editar")){
-            int index = tbl_cargo.getSelectedRow();
-            ListaCargo.get(index).setCodigo(cod);
-            ListaCargo.get(index).setNome(nome);
-            ListaCargo.get(index).setSalario(salario);
+            dao.update(c);
         }
         
         txt_cargo_codigo.setText("");
@@ -308,6 +323,16 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         Botoes(true, false, false, false, false);
         Campos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tbl_cargoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_cargoKeyReleased
+        // TODO add your handling code here:
+        if (tbl_cargo.getSelectedRow() != -1) {
+            txt_cargo_codigo.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0).toString());
+            txt_cargo_nome.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),1).toString());
+            txt_cargo_salario.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),2).toString());
+        }
+        Botoes(false, true, true, false, false);
+    }//GEN-LAST:event_tbl_cargoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
