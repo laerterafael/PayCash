@@ -17,24 +17,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     
     private boolean logado = false;
-    
+    public String title = "";
     
     public TelaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        title = this.getTitle();
         Logado(false);
-        
     }
     
     public void Logado(boolean l){
         if(l){
+            this.setTitle(title + " - Administrador");
             MenuCadastro.setEnabled(true);
             MenuConfig.setEnabled(true);
             MenuRelatorio.setEnabled(true);
+            menuLogin.setEnabled(false);
+            menuSair.setEnabled(true);
         }else{
+            this.setTitle(title);
             MenuCadastro.setEnabled(false);
             MenuConfig.setEnabled(false);
             MenuRelatorio.setEnabled(false);
+            menuLogin.setEnabled(true);
+            menuSair.setEnabled(false);
         }
         
     }
@@ -145,15 +151,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuRelatorio.setText("Relatórios");
 
         menuGeral.setText("Geral");
+        menuGeral.setEnabled(false);
         MenuRelatorio.add(menuGeral);
 
         menuPagamentos.setText("Pagamentos");
+        menuPagamentos.setEnabled(false);
         MenuRelatorio.add(menuPagamentos);
 
         menuFuncionarios.setText("Funcionários");
+        menuFuncionarios.setEnabled(false);
         MenuRelatorio.add(menuFuncionarios);
 
         menuFuncoes.setText("Funções");
+        menuFuncoes.setEnabled(false);
         MenuRelatorio.add(menuFuncoes);
 
         jMenuBar1.add(MenuRelatorio);
@@ -161,9 +171,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuConfig.setText("Configuração");
 
         menuBancoDeDados.setText("Banco de Dados");
+        menuBancoDeDados.setEnabled(false);
         MenuConfig.add(menuBancoDeDados);
 
         menuConfigGeral.setText("Geral");
+        menuConfigGeral.setEnabled(false);
         MenuConfig.add(menuConfigGeral);
 
         jMenuBar1.add(MenuConfig);
@@ -171,6 +183,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuAjuda.setText("Ajuda");
 
         menuSobre.setText("Sobre");
+        menuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreActionPerformed(evt);
+            }
+        });
         MenuAjuda.add(menuSobre);
 
         jMenuBar1.add(MenuAjuda);
@@ -222,6 +239,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
+        Sobre obj = new Sobre();
+        jdpprincipal.add(obj);
+        obj.setVisible(true);
+    }//GEN-LAST:event_menuSobreActionPerformed
 
     /**
      * @param args the command line arguments

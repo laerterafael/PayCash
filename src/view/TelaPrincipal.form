@@ -74,21 +74,25 @@
             <MenuItem class="javax.swing.JMenuItem" name="menuGeral">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Geral"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuPagamentos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pagamentos"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuFuncionarios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuFuncoes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fun&#xe7;&#xf5;es"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -101,11 +105,13 @@
             <MenuItem class="javax.swing.JMenuItem" name="menuBancoDeDados">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Banco de Dados"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuConfigGeral">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Geral"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -119,6 +125,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sobre"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSobreActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
