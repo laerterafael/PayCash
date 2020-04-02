@@ -5,7 +5,6 @@
  */
 package view;
 
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -22,12 +21,11 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
      * Creates new form CadastroCargos
      */
     String action = "Padrao";
-    ArrayList<Cargo> ListaCargo = new ArrayList();
     
     public CadastroCargos() {
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) tbl_cargo.getModel();
-        tbl_cargo.setRowSorter(new TableRowSorter(modelo));
+//        DefaultTableModel modelo = (DefaultTableModel) tbl_cargo.getModel();
+//        tbl_cargo.setRowSorter(new TableRowSorter(modelo));
         LoadTableCargo();
         Botoes(true, false, false, false, false);
         Campos(false);
@@ -65,11 +63,11 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Salário"
+                "Id", "Codigo", "Nome", "Salário"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -224,6 +222,7 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
 
         for (Cargo c: cdao.read()) {
             modelo.addRow(new Object[]{
+                c.getId(),
                 c.getCodigo(),
                 c.getNome(),
                 c.getSalario(),
@@ -250,11 +249,11 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     private void tbl_cargoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_cargoMouseClicked
 
         if (tbl_cargo.getSelectedRow() != -1) {
-            txt_cargo_codigo.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0).toString());
-            txt_cargo_nome.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),1).toString());
-            txt_cargo_salario.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),2).toString());
+            txt_cargo_codigo.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),1).toString());
+            txt_cargo_nome.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),2).toString());
+            txt_cargo_salario.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),3).toString());
         }
-        Botoes(false, true, true, false, false);
+        Botoes(true, true, true, false, false);
     }//GEN-LAST:event_tbl_cargoMouseClicked
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -297,7 +296,7 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         
         Cargo c = new Cargo();
         CargoDAO dao = new CargoDAO();
-        c.setId((int)tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0));
+        
         c.setCodigo(Integer.parseInt(txt_cargo_codigo.getText()));
         c.setNome(txt_cargo_nome.getText());
         c.setSalario(Double.parseDouble(txt_cargo_salario.getText()));
@@ -305,6 +304,7 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         if (action.equals("Novo")) {
             dao.create(c);
         }else if(action.equals("Editar")){
+            c.setId((int)tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0));
             dao.update(c);
         }
         
@@ -326,12 +326,12 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
 
     private void tbl_cargoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_cargoKeyReleased
         // TODO add your handling code here:
-        if (tbl_cargo.getSelectedRow() != -1) {
-            txt_cargo_codigo.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0).toString());
-            txt_cargo_nome.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),1).toString());
-            txt_cargo_salario.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),2).toString());
-        }
-        Botoes(false, true, true, false, false);
+//        if (tbl_cargo.getSelectedRow() != -1) {
+//            txt_cargo_codigo.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),0).toString());
+//            txt_cargo_nome.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),1).toString());
+//            txt_cargo_salario.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),2).toString());
+//        }
+//        Botoes(false, true, true, false, false);
     }//GEN-LAST:event_tbl_cargoKeyReleased
 
 

@@ -6,8 +6,12 @@
 package view;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Cargo;
 import model.Funcionario;
+import model.dao.CargoDAO;
+import model.dao.FuncionarioDAO;
 
 /**
  *
@@ -23,8 +27,12 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
     
     public CadastroFuncionarios() {
         initComponents();
+        LoadTableFunc();
+        LoadCBCargo();
         Botoes(true, false, false, false, false);
         Campos(false);
+        
+        
     }
 
     /**
@@ -64,6 +72,7 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         rb_masc = new javax.swing.JRadioButton();
 
         setClosable(true);
+        setMaximizable(true);
         setTitle("Cadastrar Funcionários");
 
         tbl_func.setModel(new javax.swing.table.DefaultTableModel(
@@ -71,19 +80,12 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "CPF", "Função"
+                "Id", "Codigo", "Nome", "Sexo", "CPF", "RG", "Data Nasc", "Telefone", "Funcao"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -96,7 +98,9 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbl_func);
         if (tbl_func.getColumnModel().getColumnCount() > 0) {
-            tbl_func.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tbl_func.getColumnModel().getColumn(0).setPreferredWidth(2);
+            tbl_func.getColumnModel().getColumn(1).setPreferredWidth(7);
+            tbl_func.getColumnModel().getColumn(5).setPreferredWidth(20);
         }
 
         btnNovo.setText("Novo");
@@ -177,55 +181,51 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_func_nome)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_func_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 41, Short.MAX_VALUE))))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel3)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_func_nome)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_func_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 491, Short.MAX_VALUE))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(txt_func_rg, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel11))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                                .addGap(4, 4, 4)
-                                                .addComponent(rb_masc)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(rb_fem, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel8))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                            .addComponent(txt_func_telefone))))
-                                .addGap(38, 38, 38)))))
+                            .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(rb_masc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rb_fem, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(486, 486, 486)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar)
                 .addContainerGap())
@@ -245,28 +245,28 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_func_rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel7)
+                    .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(rb_fem)
                     .addComponent(rb_masc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -305,36 +305,40 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        setBounds(0, 0, 450, 567);
+        setBounds(0, 0, 900, 600);
     }// </editor-fold>//GEN-END:initComponents
 
     
     public void LoadTableFunc(){
         
-        DefaultTableModel modelo = new DefaultTableModel(new Object []{"Codigo", "Nome", "CPF", "Função"},0);
-        
-        for (int i = 0; i < ListaFunc.size(); i++) {
-            Object linha[] = new Object[]{ListaFunc.get(i).getCodigo(),ListaFunc.get(i).getNome(),ListaFunc.get(i).getCpf(), ListaFunc.get(i).getFuncao()};
-            modelo.addRow(linha);
+        DefaultTableModel modelo = (DefaultTableModel) tbl_func.getModel();
+        modelo.setNumRows(0);
+        FuncionarioDAO fdao = new FuncionarioDAO();
+
+        for (Funcionario f: fdao.read()) {
+            modelo.addRow(new Object[]{
+                f.getId(),
+                f.getCodigo(),
+                f.getNome(),
+                f.getSexo(),
+                f.getCpf(),
+                f.getRg(),
+                f.getData_nascimento(),
+                f.getTelefone(),
+                f.getFuncao()
+            });
+
         }
-        tbl_func.setModel(modelo);
-        tbl_func.getColumnModel().getColumn(0).setResizable(false);
-        tbl_func.getColumnModel().getColumn(0).setPreferredWidth(5);
-        tbl_func.getColumnModel().getColumn(1).setResizable(false);
-        tbl_func.getColumnModel().getColumn(2).setResizable(false);
-        tbl_func.getColumnModel().getColumn(3).setResizable(false);
         
     }
     
-    
-    CadastroCargos cc = new CadastroCargos();
-
     public void LoadCBCargo(){
-        cb_cargo.removeAllItems();
         cb_cargo.addItem("Selecione");
         
-        for (int i = 0; i<cc.ListaCargo.size(); i++) {
-            cb_cargo.addItem(cc.ListaCargo.get(i).getNome());
+        CargoDAO dao = new CargoDAO();
+        for (Cargo c : dao.read()) {
+            cb_cargo.addItem(c);
+            
         }
     }
     
@@ -380,8 +384,6 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Botoes(true, false, false, false, false);
-        Campos(false);
         txt_func_codigo.setText("");
         txt_func_nome.setText("");
         txt_func_cpf.setText("");
@@ -389,36 +391,37 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         txt_func_data_nascimento.setText("");
         txt_func_telefone.setText("");
         bg_sexo.clearSelection();
+        Botoes(true, false, false, false, false);
+        Campos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        int cod = Integer.parseInt(txt_func_codigo.getText());
-        String nome = txt_func_nome.getText();
-        String cpf = txt_func_cpf.getText();
-        String rg = txt_func_rg.getText();
-        String data_nasc =  txt_func_data_nascimento.getText();
-        String telefone = txt_func_telefone.getText();
-        String sexo = "";
+        Funcionario f = new Funcionario();
+        Cargo cargo = (Cargo)cb_cargo.getSelectedItem();
+        FuncionarioDAO dao = new FuncionarioDAO();
         
+        String sexo = "";
         if (rb_fem.isSelected()) {
             sexo = rb_fem.getText();
         }else{
             sexo = rb_masc.getText();
         }
-          
+        
+        f.setCodigo(Integer.parseInt(txt_func_codigo.getText()));
+        f.setNome(txt_func_nome.getText());
+        f.setSexo(sexo);
+        f.setCpf(txt_func_cpf.getText());
+        f.setRg(txt_func_rg.getText());
+        f.setData_nascimento(txt_func_data_nascimento.getText());
+        f.setTelefone(txt_func_telefone.getText());
+        f.setFuncao(cargo.getCodigo());
+        
+        
         if (action.equals("Novo")) {
-            Funcionario func =  new Funcionario(cod,nome,sexo,cpf,rg,data_nasc,telefone);
-            ListaFunc.add(func);
-            
+            dao.create(f);
         }else if(action.equals("Editar")){
-             int index = tbl_func.getSelectedRow();
-             ListaFunc.get(index).setCodigo(cod);
-             ListaFunc.get(index).setNome(nome);
-             ListaFunc.get(index).setSexo(sexo);
-             ListaFunc.get(index).setCpf(cpf);
-             ListaFunc.get(index).setRg(rg);
-             ListaFunc.get(index).setData_nascimento(data_nasc);
-             ListaFunc.get(index).setTelefone(telefone);
+            f.setId((int)tbl_func.getValueAt(tbl_func.getSelectedRow(),0));
+            dao.update(f);
         }
         
         txt_func_codigo.setText("");
@@ -438,24 +441,37 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_func_codigoActionPerformed
 
     private void tbl_funcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_funcMouseClicked
-        int index = tbl_func.getSelectedRow();
-        if (index>=0 & index<ListaFunc.size()){
-            Funcionario f = ListaFunc.get(index);
-            txt_func_codigo.setText(String.valueOf(f.getCodigo()));
-            txt_func_nome.setText(f.getNome());
-            txt_func_cpf.setText(f.getCpf());
-            txt_func_rg.setText(f.getRg());
-            txt_func_data_nascimento.setText(f.getData_nascimento());
-            txt_func_telefone.setText(f.getTelefone());
+        if (tbl_func.getSelectedRow() != -1) {
+            txt_func_codigo.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),1).toString());
+            txt_func_nome.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),2).toString());
+            txt_func_cpf.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),4).toString());
+            txt_func_rg.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),5).toString());
+            txt_func_data_nascimento.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),6).toString());
+            txt_func_telefone.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),7).toString());
         }
-        Botoes(false, true, true, false, false);
+        
+        Botoes(true, true, true, false, false);
     }//GEN-LAST:event_tbl_funcMouseClicked
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int index = tbl_func.getSelectedRow();
-        if (index>=0 & index<ListaFunc.size()){
-            ListaFunc.remove(index);
+       if (tbl_func.getSelectedRow() != -1) {
+            Funcionario f = new Funcionario();
+            FuncionarioDAO dao = new FuncionarioDAO();
+            f.setId((int)tbl_func.getValueAt(tbl_func.getSelectedRow(),0));
+            
+            dao.delete(f);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item para excluir.");
         }
+        txt_func_codigo.setText("");
+        txt_func_nome.setText("");
+        txt_func_cpf.setText("");
+        txt_func_rg.setText("");
+        txt_func_data_nascimento.setText("");
+        txt_func_telefone.setText("");
+        bg_sexo.clearSelection();
+        
         LoadTableFunc();
         Botoes(true, false, false, false, false);
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -468,7 +484,7 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cb_cargo;
+    private javax.swing.JComboBox<Object> cb_cargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

@@ -5,13 +5,12 @@
  */
 package model;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author laert
  */
 public class Funcionario {
+    private int id;
     private int codigo;
     private String nome;
     private String sexo;
@@ -24,7 +23,8 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(int codigo, String nome, String sexo, String cpf, String rg, String data_nascimento, String telefone) {
+    public Funcionario(int id, int codigo, String nome, String sexo, String cpf, String rg, String data_nascimento, String telefone) {
+        this.id = id;
         this.codigo = codigo;
         this.nome = nome;
         this.sexo = sexo;
@@ -34,6 +34,14 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getCodigo() {
         return codigo;
     }
