@@ -5,7 +5,6 @@
  */
 package view;
 
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Cargo;
@@ -23,7 +22,6 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
      * Creates new form CadastroFuncionarios
      */
     String action = "Padrao";
-    ArrayList<Funcionario> ListaFunc = new ArrayList();
     
     public CadastroFuncionarios() {
         initComponents();
@@ -31,8 +29,6 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         LoadCBCargo();
         Botoes(true, false, false, false, false);
         Campos(false);
-        
-        
     }
 
     /**
