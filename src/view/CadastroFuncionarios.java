@@ -442,6 +442,12 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
 
     private void tbl_funcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_funcMouseClicked
         if (tbl_func.getSelectedRow() != -1) {
+            String sexo = tbl_func.getValueAt(tbl_func.getSelectedRow(),3).toString();
+                if (sexo.equals("Masculino")) {
+                    rb_masc.setSelected(true);
+                }else{
+                    rb_fem.setSelected(true);
+                }
             txt_func_codigo.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),1).toString());
             txt_func_nome.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),2).toString());
             txt_func_cpf.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),4).toString());
