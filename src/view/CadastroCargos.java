@@ -50,24 +50,24 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         txt_cargo_codigo = new javax.swing.JTextField();
         txt_cargo_nome = new javax.swing.JTextField();
-        txt_cargo_salario = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Cadastro de Cargos");
+        setFocusTraversalPolicyProvider(true);
+        setInheritsPopupMenu(true);
 
         tbl_cargo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Codigo", "Nome", "Salário"
+                "Id", "Codigo", "Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -85,6 +85,10 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane2.setViewportView(tbl_cargo);
+        if (tbl_cargo.getColumnModel().getColumnCount() > 0) {
+            tbl_cargo.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tbl_cargo.getColumnModel().getColumn(1).setPreferredWidth(10);
+        }
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -133,8 +137,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Nome:");
 
-        jLabel10.setText("Salário:");
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -148,15 +150,13 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10)
                     .addComponent(jLabel6)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_cargo_nome)
-                    .addComponent(txt_cargo_salario, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_cargo_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_cargo_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +169,7 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txt_cargo_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txt_cargo_salario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,7 +221,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
                 c.getId(),
                 c.getCodigo(),
                 c.getNome(),
-                c.getSalario(),
             });
 
         }
@@ -243,7 +238,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     public void Campos(boolean action){
         txt_cargo_codigo.setEnabled(action);
         txt_cargo_nome.setEnabled(action);
-        txt_cargo_salario.setEnabled(action);
     }
     
     private void tbl_cargoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_cargoMouseClicked
@@ -251,7 +245,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         if (tbl_cargo.getSelectedRow() != -1) {
             txt_cargo_codigo.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),1).toString());
             txt_cargo_nome.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),2).toString());
-            txt_cargo_salario.setText(tbl_cargo.getValueAt(tbl_cargo.getSelectedRow(),3).toString());
         }
         Botoes(true, true, true, false, false);
     }//GEN-LAST:event_tbl_cargoMouseClicked
@@ -262,7 +255,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         action = "Novo";
         txt_cargo_codigo.setText("");
         txt_cargo_nome.setText("");
-        txt_cargo_salario.setText("");
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -286,7 +278,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         
         txt_cargo_codigo.setText("");
         txt_cargo_nome.setText("");
-        txt_cargo_salario.setText("");
         
         LoadTableCargo();
         Botoes(true, false, false, false, false);
@@ -299,7 +290,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         
         c.setCodigo(Integer.parseInt(txt_cargo_codigo.getText()));
         c.setNome(txt_cargo_nome.getText());
-        c.setSalario(Double.parseDouble(txt_cargo_salario.getText()));
         
         if (action.equals("Novo")) {
             dao.create(c);
@@ -310,7 +300,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         
         txt_cargo_codigo.setText("");
         txt_cargo_nome.setText("");
-        txt_cargo_salario.setText("");
         LoadTableCargo();
         Botoes(true, false, false, false, false);
         Campos(false);
@@ -319,7 +308,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         txt_cargo_codigo.setText("");
         txt_cargo_nome.setText("");
-        txt_cargo_salario.setText("");
         Botoes(true, false, false, false, false);
         Campos(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -341,7 +329,6 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel7;
@@ -349,6 +336,5 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
     private javax.swing.JTable tbl_cargo;
     private javax.swing.JTextField txt_cargo_codigo;
     private javax.swing.JTextField txt_cargo_nome;
-    private javax.swing.JTextField txt_cargo_salario;
     // End of variables declaration//GEN-END:variables
 }

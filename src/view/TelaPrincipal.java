@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Locale;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,6 +26,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         title = this.getTitle();
         Logado(false);
+        
     }
     
     public void Logado(boolean l){
@@ -41,6 +44,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             MenuRelatorio.setEnabled(false);
             menuLogin.setEnabled(true);
             menuSair.setEnabled(false);
+            
         }
         
     }
@@ -59,7 +63,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuArquivo = new javax.swing.JMenu();
         menuLogin = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuFechar = new javax.swing.JMenuItem();
         MenuCadastro = new javax.swing.JMenu();
         menuUsuario = new javax.swing.JMenuItem();
         menuFuncionario = new javax.swing.JMenuItem();
@@ -110,13 +114,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         MenuArquivo.add(menuSair);
 
-        jMenuItem1.setText("Fechar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuFechar.setText("Fechar");
+        menuFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuFecharActionPerformed(evt);
             }
         });
-        MenuArquivo.add(jMenuItem1);
+        MenuArquivo.add(menuFechar);
 
         jMenuBar1.add(MenuArquivo);
 
@@ -151,7 +155,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuRelatorio.setText("Relatórios");
 
         menuGeral.setText("Geral");
-        menuGeral.setEnabled(false);
+        menuGeral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGeralActionPerformed(evt);
+            }
+        });
         MenuRelatorio.add(menuGeral);
 
         menuPagamentos.setText("Pagamentos");
@@ -233,18 +241,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuLoginActionPerformed
 
     private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
-        this.Logado(false);
+        new TelaPrincipal().setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_menuSairActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFecharActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuFecharActionPerformed
 
     private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
         Sobre obj = new Sobre();
         jdpprincipal.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_menuSobreActionPerformed
+
+    private void menuGeralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGeralActionPerformed
+        Geral g = new Geral();
+        jdpprincipal.add(g);
+        g.setVisible(true);
+    }//GEN-LAST:event_menuGeralActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,11 +304,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuConfig;
     private javax.swing.JMenu MenuRelatorio;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdpprincipal;
     private javax.swing.JMenuItem menuBancoDeDados;
     private javax.swing.JMenuItem menuCargo;
     private javax.swing.JMenuItem menuConfigGeral;
+    private javax.swing.JMenuItem menuFechar;
     private javax.swing.JMenuItem menuFuncionario;
     private javax.swing.JMenuItem menuFuncionarios;
     private javax.swing.JMenuItem menuFuncoes;

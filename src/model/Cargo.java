@@ -14,22 +14,19 @@ public class Cargo {
     private int id;
     private int codigo;
     private String nome;
-    private double salario;
 
     public Cargo() {
     }
 
-    public Cargo(int codigo, String nome, double salario) {
+    public Cargo(int codigo, String nome) {
         this.codigo = codigo;
         this.nome = nome;
-        this.salario = salario;
     }
     
-    public Cargo(int id, int codigo, String nome, double salario) {
+    public Cargo(int id, int codigo, String nome) {
         this.id = id;
         this.codigo = codigo;
         this.nome = nome;
-        this.salario = salario;
     }
 
     public int getId() {
@@ -38,14 +35,6 @@ public class Cargo {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
     }
 
     public int getCodigo() {

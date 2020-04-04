@@ -20,16 +20,20 @@ import model.Cargo;
  * @author laert
  */
 public class CargoDAO {
+    private Connection con = null;
+    
+    public CargoDAO(){
+        con = ConnectionFactory.getConnection();
+    }
     
     public void create(Cargo c){
-        Connection con = ConnectionFactory.getConnection();
+        String sql = "INSERT INTO cargo (codigo,nome) VALUES(?,?)";
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO cargo (codigo,nome,salario) VALUES(?,?,?)");
+            stmt = con.prepareStatement(sql);
             stmt.setInt(1, c.getCodigo());
             stmt.setString(2, c.getNome());
-            stmt.setDouble(3, c.getSalario());
             
             stmt.executeUpdate();
             
@@ -43,16 +47,14 @@ public class CargoDAO {
     }
     
     public List<Cargo> read() {
-
-        Connection con = ConnectionFactory.getConnection();
-        
+        String sql = "SELECT * FROM cargo";
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         List<Cargo> cargos = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM cargo");
+            stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -61,7 +63,6 @@ public class CargoDAO {
                 cargo.setId(rs.getInt("id"));
                 cargo.setCodigo(rs.getInt("codigo"));
                 cargo.setNome(rs.getString("nome"));
-                cargo.setSalario(rs.getDouble("salario"));
                 
                 cargos.add(cargo);
             }
@@ -77,15 +78,14 @@ public class CargoDAO {
     }
     
     public void update(Cargo c){
-        Connection con = ConnectionFactory.getConnection();
+        String sql = "UPDATE cargo SET codigo = ?, nome = ? WHERE id = ?";
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("UPDATE cargo SET codigo = ?, nome = ?, salario = ? WHERE id = ?");
+            stmt = con.prepareStatement(sql);
             stmt.setInt(1, c.getCodigo());
             stmt.setString(2, c.getNome());
-            stmt.setDouble(3, c.getSalario());
-            stmt.setInt(4, c.getId());
+            stmt.setInt(3, c.getId());
             
             stmt.executeUpdate();
             
@@ -98,11 +98,11 @@ public class CargoDAO {
         }
     }
     public void delete(Cargo c){
-        Connection con = ConnectionFactory.getConnection();
+        String sql = "DELETE FROM cargo WHERE id = ?";
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("DELETE FROM cargo WHERE id = ?");
+            stmt = con.prepareStatement(sql);
             stmt.setInt(1, c.getId());
             
             stmt.executeUpdate();

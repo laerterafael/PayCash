@@ -18,10 +18,13 @@ import java.util.logging.Logger;
  * @author laert
  */
 public class UsuarioDAO {
+    private Connection con = null;
+    public UsuarioDAO(){
+        con = ConnectionFactory.getConnection();
+    }
     
     public boolean checkLogin(String login, String senha) {
-
-        Connection con = ConnectionFactory.getConnection();
+        String sql = "SELECT * FROM user WHERE login = ? and senha = ? and status = 1";
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -29,7 +32,7 @@ public class UsuarioDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM user WHERE login = ? and senha = ? and status = 1");
+            stmt = con.prepareStatement(sql);
             stmt.setString(1, login);
             stmt.setString(2, senha);
 

@@ -66,6 +66,8 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         cb_cargo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         rb_masc = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        txt_func_salario = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -76,11 +78,11 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Codigo", "Nome", "Sexo", "CPF", "RG", "Data Nasc", "Telefone", "Funcao"
+                "Id", "Codigo", "Nome", "Sexo", "CPF", "RG", "Data Nasc", "Telefone", "Salario", "Cargo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -170,61 +172,59 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         bg_sexo.add(rb_masc);
         rb_masc.setText("Masculino");
 
+        jLabel6.setText("Salário:");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_func_nome)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_func_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 491, Short.MAX_VALUE))))
+                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                                .addGap(83, 83, 83)
+                                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel1)
+                                                    .addComponent(jLabel2)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(jLabel3)))
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_func_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_func_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txt_func_rg, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_func_rg, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel11))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(rb_masc)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rb_fem, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(486, 486, 486)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rb_fem, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_func_salario, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar)
-                .addContainerGap())
+                .addGap(13, 13, 13))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,40 +233,44 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_func_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_func_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_func_rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_func_rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_func_data_nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_func_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(9, 9, 9)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(rb_masc)
                     .addComponent(rb_fem)
-                    .addComponent(rb_masc))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(txt_func_salario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,7 +281,7 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -296,9 +300,9 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
                     .addComponent(btnNovo)
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         setBounds(0, 0, 900, 600);
@@ -321,7 +325,8 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
                 f.getRg(),
                 f.getData_nascimento(),
                 f.getTelefone(),
-                f.getFuncao()
+                f.getSalario(),
+                f.getCargo()
             });
 
         }
@@ -353,9 +358,11 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         txt_func_rg.setEnabled(action);
         txt_func_data_nascimento.setEnabled(action);
         txt_func_telefone.setEnabled(action);
+        txt_func_salario.setEnabled(action);
         bg_sexo.clearSelection();
         rb_fem.setEnabled(action);
         rb_masc.setEnabled(action);
+        cb_cargo.setEnabled(action);
     }
      
      
@@ -370,6 +377,7 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         txt_func_rg.setText("");
         txt_func_data_nascimento.setText("");
         txt_func_telefone.setText("");
+        txt_func_salario.setText("");
         bg_sexo.clearSelection();
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -378,63 +386,6 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         Campos(true);
         action = "Editar";
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        txt_func_codigo.setText("");
-        txt_func_nome.setText("");
-        txt_func_cpf.setText("");
-        txt_func_rg.setText("");
-        txt_func_data_nascimento.setText("");
-        txt_func_telefone.setText("");
-        bg_sexo.clearSelection();
-        Botoes(true, false, false, false, false);
-        Campos(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Funcionario f = new Funcionario();
-        Cargo cargo = (Cargo)cb_cargo.getSelectedItem();
-        FuncionarioDAO dao = new FuncionarioDAO();
-        
-        String sexo = "";
-        if (rb_fem.isSelected()) {
-            sexo = rb_fem.getText();
-        }else{
-            sexo = rb_masc.getText();
-        }
-        
-        f.setCodigo(Integer.parseInt(txt_func_codigo.getText()));
-        f.setNome(txt_func_nome.getText());
-        f.setSexo(sexo);
-        f.setCpf(txt_func_cpf.getText());
-        f.setRg(txt_func_rg.getText());
-        f.setData_nascimento(txt_func_data_nascimento.getText());
-        f.setTelefone(txt_func_telefone.getText());
-        f.setFuncao(cargo.getCodigo());
-        
-        
-        if (action.equals("Novo")) {
-            dao.create(f);
-        }else if(action.equals("Editar")){
-            f.setId((int)tbl_func.getValueAt(tbl_func.getSelectedRow(),0));
-            dao.update(f);
-        }
-        
-        txt_func_codigo.setText("");
-        txt_func_nome.setText("");
-        txt_func_cpf.setText("");
-        txt_func_rg.setText("");
-        txt_func_data_nascimento.setText("");
-        txt_func_telefone.setText("");
-        bg_sexo.clearSelection();
-        LoadTableFunc();
-        Botoes(true, false, false, false, false);
-        Campos(false);
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void txt_func_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_func_codigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_func_codigoActionPerformed
 
     private void tbl_funcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_funcMouseClicked
         if (tbl_func.getSelectedRow() != -1) {
@@ -450,6 +401,8 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
             txt_func_rg.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),5).toString());
             txt_func_data_nascimento.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),6).toString());
             txt_func_telefone.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),7).toString());
+            txt_func_salario.setText(tbl_func.getValueAt(tbl_func.getSelectedRow(),8).toString());
+            cb_cargo.getModel().setSelectedItem(tbl_func.getValueAt(tbl_func.getSelectedRow(),9));
         }
         
         Botoes(true, true, true, false, false);
@@ -472,11 +425,72 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
         txt_func_rg.setText("");
         txt_func_data_nascimento.setText("");
         txt_func_telefone.setText("");
+        txt_func_salario.setText("");
         bg_sexo.clearSelection();
         
         LoadTableFunc();
         Botoes(true, false, false, false, false);
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void txt_func_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_func_codigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_func_codigoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        Funcionario f = new Funcionario();
+        Cargo cargo = (Cargo)cb_cargo.getSelectedItem();
+        FuncionarioDAO dao = new FuncionarioDAO();
+
+        String sexo = "";
+        if (rb_fem.isSelected()) {
+            sexo = rb_fem.getText();
+        }else{
+            sexo = rb_masc.getText();
+        }
+
+        f.setCodigo(Integer.parseInt(txt_func_codigo.getText()));
+        f.setNome(txt_func_nome.getText());
+        f.setSexo(sexo);
+        f.setCpf(txt_func_cpf.getText());
+        f.setRg(txt_func_rg.getText());
+        f.setData_nascimento(txt_func_data_nascimento.getText());
+        f.setTelefone(txt_func_telefone.getText());
+        f.setSalario(Double.parseDouble(txt_func_salario.getText()));
+        f.setCargo(cargo);
+
+        if (action.equals("Novo")) {
+            dao.create(f);
+        }else if(action.equals("Editar")){
+            f.setId((int)tbl_func.getValueAt(tbl_func.getSelectedRow(),0));
+            dao.update(f);
+        }
+
+        txt_func_codigo.setText("");
+        txt_func_nome.setText("");
+        txt_func_cpf.setText("");
+        txt_func_rg.setText("");
+        txt_func_data_nascimento.setText("");
+        txt_func_telefone.setText("");
+        txt_func_salario.setText("");
+        
+        bg_sexo.clearSelection();
+        LoadTableFunc();
+        Botoes(true, false, false, false, false);
+        Campos(false);
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        txt_func_codigo.setText("");
+        txt_func_nome.setText("");
+        txt_func_cpf.setText("");
+        txt_func_rg.setText("");
+        txt_func_data_nascimento.setText("");
+        txt_func_telefone.setText("");
+        txt_func_salario.setText("");
+        bg_sexo.clearSelection();
+        Botoes(true, false, false, false, false);
+        Campos(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -493,6 +507,7 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel6;
@@ -505,6 +520,7 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_func_data_nascimento;
     private javax.swing.JTextField txt_func_nome;
     private javax.swing.JTextField txt_func_rg;
+    private javax.swing.JTextField txt_func_salario;
     private javax.swing.JTextField txt_func_telefone;
     // End of variables declaration//GEN-END:variables
 }

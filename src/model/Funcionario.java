@@ -18,12 +18,13 @@ public class Funcionario {
     private String rg;
     private String data_nascimento;
     private String telefone;
-    private int funcao;
+    private double salario;
+    private Cargo cargo;
 
     public Funcionario() {
     }
 
-    public Funcionario(int id, int codigo, String nome, String sexo, String cpf, String rg, String data_nascimento, String telefone) {
+    public Funcionario(int id, int codigo, String nome, String sexo, String cpf, String rg, String data_nascimento, String telefone, double salario, Cargo cargo) {
         this.id = id;
         this.codigo = codigo;
         this.nome = nome;
@@ -32,6 +33,8 @@ public class Funcionario {
         this.rg = rg;
         this.data_nascimento = data_nascimento;
         this.telefone = telefone;
+        this.salario = salario;
+        this.cargo = cargo;
     }
 
     public int getId() {
@@ -98,12 +101,20 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
-    public int getFuncao() {
-        return funcao;
+    public double getSalario() {
+        return salario;
     }
 
-    public void setFuncao(int funcao) {
-        this.funcao = funcao;
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
     
     
