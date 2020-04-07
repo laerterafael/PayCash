@@ -9,12 +9,12 @@ package view;
  *
  * @author laert
  */
-public class CadastroUsuario extends javax.swing.JInternalFrame {
+public class Usuario extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastroUsuario
      */
-    public CadastroUsuario() {
+    public Usuario() {
         initComponents();
     }
 

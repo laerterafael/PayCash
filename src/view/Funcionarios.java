@@ -16,14 +16,14 @@ import model.dao.FuncionarioDAO;
  *
  * @author laert
  */
-public class CadastroFuncionarios extends javax.swing.JInternalFrame {
+public class Funcionarios extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastroFuncionarios
      */
     String action = "Padrao";
     
-    public CadastroFuncionarios() {
+    public Funcionarios() {
         initComponents();
         LoadTableFunc();
         LoadCBCargo();

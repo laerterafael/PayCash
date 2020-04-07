@@ -15,14 +15,14 @@ import model.dao.CargoDAO;
  *
  * @author laert
  */
-public class CadastroCargos extends javax.swing.JInternalFrame {
+public class Cargos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastroCargos
      */
     String action = "Padrao";
     
-    public CadastroCargos() {
+    public Cargos() {
         initComponents();
 //        DefaultTableModel modelo = (DefaultTableModel) tbl_cargo.getModel();
 //        tbl_cargo.setRowSorter(new TableRowSorter(modelo));
@@ -91,6 +91,7 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         }
 
         btnNovo.setText("Novo");
+        btnNovo.setPreferredSize(new java.awt.Dimension(60, 25));
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
@@ -98,6 +99,9 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.setMaximumSize(new java.awt.Dimension(60, 25));
+        btnEditar.setMinimumSize(new java.awt.Dimension(60, 25));
+        btnEditar.setPreferredSize(new java.awt.Dimension(60, 25));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -107,7 +111,7 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
         btnExcluir.setText("Excluir");
         btnExcluir.setMaximumSize(new java.awt.Dimension(75, 23));
         btnExcluir.setMinimumSize(new java.awt.Dimension(75, 23));
-        btnExcluir.setPreferredSize(new java.awt.Dimension(75, 23));
+        btnExcluir.setPreferredSize(new java.awt.Dimension(60, 25));
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
@@ -200,8 +204,8 @@ public class CadastroCargos extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo)
-                    .addComponent(btnEditar)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
