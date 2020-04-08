@@ -43,6 +43,7 @@ public class TelaLogin extends javax.swing.JFrame {
         setResizable(false);
 
         txt_login.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_login.setText("admin");
 
         jLabel1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jLabel1.setText("Login:");

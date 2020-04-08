@@ -438,7 +438,6 @@ public class Funcionarios extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Funcionario f = new Funcionario();
-        Cargo cargo = (Cargo)cb_cargo.getSelectedItem();
         FuncionarioDAO dao = new FuncionarioDAO();
 
         String sexo = "";
@@ -456,7 +455,7 @@ public class Funcionarios extends javax.swing.JInternalFrame {
         f.setData_nascimento(txt_func_data_nascimento.getText());
         f.setTelefone(txt_func_telefone.getText());
         f.setSalario(Double.parseDouble(txt_func_salario.getText()));
-        f.setCargo(cargo);
+        f.setCargo((Cargo)cb_cargo.getSelectedItem());
 
         if (action.equals("Novo")) {
             dao.create(f);

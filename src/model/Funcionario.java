@@ -117,5 +117,9 @@ public class Funcionario {
         this.cargo = cargo;
     }
     
+    @Override
+    public String toString() {
+        return getNome(); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
