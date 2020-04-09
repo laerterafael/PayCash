@@ -5,13 +5,17 @@
  */
 package connection;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,18 +23,50 @@ import java.util.logging.Logger;
  */
 public class ConnectionFactory {
     
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/paycash";
-    private static final String USER = "root";
-    private static final String PASS = "123456";
-
+    private static String DRIVER = "com.mysql.jdbc.Driver";
+    private static String URL = "jdbc:mysql://";
+    private static String DB_HOST = "";
+    private static String DB_PORT = "";
+    private static String DB_NAME = "";
+    private static String DB_USER = "";
+    private static String DB_PASS = "";
+    
+    private static Properties config = new Properties();
+    private static String arquivo = "config/db.ini";
+    
+    public static Properties LoadConfig(boolean load){
+        if (load) {
+            try {
+            config.load(new FileInputStream(arquivo));
+            
+            DB_HOST = config.getProperty("DB_HOST");
+            DB_PORT = config.getProperty("DB_PORT");
+            DB_NAME = config.getProperty("DB_NAME");
+            DB_USER = config.getProperty("DB_USER");
+            DB_PASS = config.getProperty("DB_PASS");
+            } catch (IOException ex) {                
+                JOptionPane.showMessageDialog(null, "Erro ao ler arquivo de configuração: " + ex);
+            }
+        }else{
+            DB_HOST = "localhost";
+            DB_PORT = "3306";
+            DB_NAME = "paycash";
+            DB_USER = "root";
+            DB_PASS = "123456";
+        }       
+        
+        return config;
+    }
+    
     public static Connection getConnection() {
+        LoadConfig(true);
         try {
             Class.forName(DRIVER);
-            return DriverManager.getConnection(URL, USER, PASS);
+            return DriverManager.getConnection(URL + DB_HOST + ":" + DB_PORT + "/" + DB_NAME, DB_USER, DB_PASS);
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new RuntimeException("Erro na conexão: ", ex);
+            JOptionPane.showMessageDialog(null, "Erro ao conectar Banco de Dados: " + ex);
         }
+        return null;
     }
 
     public static void closeConnection(Connection con) {
