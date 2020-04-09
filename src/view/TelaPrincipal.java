@@ -212,7 +212,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuConfig.setText("Configuração");
 
         menuBancoDeDados.setText("Banco de Dados");
-        menuBancoDeDados.setEnabled(false);
+        menuBancoDeDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBancoDeDadosActionPerformed(evt);
+            }
+        });
         MenuConfig.add(menuBancoDeDados);
 
         menuConfigGeral.setText("Geral");
@@ -312,6 +316,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jdpprincipal.add(rf);
         rf.setVisible(true);
     }//GEN-LAST:event_menuFuncionariosActionPerformed
+
+    private void menuBancoDeDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBancoDeDadosActionPerformed
+        ConfigBancoDeDados config = new ConfigBancoDeDados();
+        jdpprincipal.add(config);
+        config.setVisible(true);
+    }//GEN-LAST:event_menuBancoDeDadosActionPerformed
 
     /**
      * @param args the command line arguments

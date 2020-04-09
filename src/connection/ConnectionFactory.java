@@ -30,6 +30,48 @@ public class ConnectionFactory {
     private static String DB_NAME = "";
     private static String DB_USER = "";
     private static String DB_PASS = "";
+
+    public static String getDB_HOST() {
+        return DB_HOST;
+    }
+
+    public static void setDB_HOST(String DB_HOST) {
+        ConnectionFactory.DB_HOST = DB_HOST;
+    }
+
+    public static String getDB_PORT() {
+        return DB_PORT;
+    }
+
+    public static void setDB_PORT(String DB_PORT) {
+        ConnectionFactory.DB_PORT = DB_PORT;
+    }
+
+    public static String getDB_NAME() {
+        return DB_NAME;
+    }
+
+    public static void setDB_NAME(String DB_NAME) {
+        ConnectionFactory.DB_NAME = DB_NAME;
+    }
+
+    public static String getDB_USER() {
+        return DB_USER;
+    }
+
+    public static void setDB_USER(String DB_USER) {
+        ConnectionFactory.DB_USER = DB_USER;
+    }
+
+    public static String getDB_PASS() {
+        return DB_PASS;
+    }
+
+    public static void setDB_PASS(String DB_PASS) {
+        ConnectionFactory.DB_PASS = DB_PASS;
+    }
+    
+    
     
     private static Properties config = new Properties();
     private static String arquivo = "config/db.ini";

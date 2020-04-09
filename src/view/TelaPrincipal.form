@@ -125,8 +125,10 @@
             <MenuItem class="javax.swing.JMenuItem" name="menuBancoDeDados">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Banco de Dados"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuBancoDeDadosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuConfigGeral">
               <Properties>
