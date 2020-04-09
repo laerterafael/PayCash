@@ -1,7 +1,5 @@
 package view;
 
-import java.util.Locale;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,15 +31,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         if(l){
             this.setTitle(title + " - Administrador");
             MenuCadastro.setEnabled(true);
-            MenuConfig.setEnabled(true);
+            MenuPagamento.setEnabled(true);
             MenuRelatorio.setEnabled(true);
+            MenuConfig.setEnabled(true);
             menuLogin.setEnabled(false);
             menuSair.setEnabled(true);
         }else{
             this.setTitle(title);
             MenuCadastro.setEnabled(false);
-            MenuConfig.setEnabled(false);
+            MenuPagamento.setEnabled(false);
             MenuRelatorio.setEnabled(false);
+            MenuConfig.setEnabled(false);            
             menuLogin.setEnabled(true);
             menuSair.setEnabled(false);
             
@@ -68,14 +68,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuUsuario = new javax.swing.JMenuItem();
         menuFuncionario = new javax.swing.JMenuItem();
         menuCargo = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        MenuPagamento = new javax.swing.JMenu();
+        menuAgendar = new javax.swing.JMenuItem();
+        menuProcessar = new javax.swing.JMenuItem();
         MenuRelatorio = new javax.swing.JMenu();
         menuGeral = new javax.swing.JMenuItem();
         menuPagamentos = new javax.swing.JMenuItem();
         menuFuncionarios = new javax.swing.JMenuItem();
-        menuFuncoes = new javax.swing.JMenuItem();
         MenuConfig = new javax.swing.JMenu();
         menuBancoDeDados = new javax.swing.JMenuItem();
         menuConfigGeral = new javax.swing.JMenuItem();
@@ -92,11 +91,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jdpprincipal.setLayout(jdpprincipalLayout);
         jdpprincipalLayout.setHorizontalGroup(
             jdpprincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 950, Short.MAX_VALUE)
+            .add(0, 800, Short.MAX_VALUE)
         );
         jdpprincipalLayout.setVerticalGroup(
             jdpprincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 629, Short.MAX_VALUE)
+            .add(0, 600, Short.MAX_VALUE)
         );
 
         MenuArquivo.setText("Arquivo");
@@ -155,20 +154,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuCadastro);
 
-        jMenu1.setText("Pagamentos");
+        MenuPagamento.setText("Pagamentos");
 
-        jMenuItem1.setText("Agendar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuAgendar.setText("Agendar");
+        menuAgendar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuAgendarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        MenuPagamento.add(menuAgendar);
 
-        jMenuItem3.setText("Processar");
-        jMenu1.add(jMenuItem3);
+        menuProcessar.setText("Processar");
+        MenuPagamento.add(menuProcessar);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(MenuPagamento);
 
         MenuRelatorio.setText("Relatórios");
 
@@ -181,15 +180,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuRelatorio.add(menuGeral);
 
         menuPagamentos.setText("Pagamentos");
+        menuPagamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPagamentosActionPerformed(evt);
+            }
+        });
         MenuRelatorio.add(menuPagamentos);
 
         menuFuncionarios.setText("Funcionários");
-        menuFuncionarios.setEnabled(false);
+        menuFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFuncionariosActionPerformed(evt);
+            }
+        });
         MenuRelatorio.add(menuFuncionarios);
-
-        menuFuncoes.setText("Funções");
-        menuFuncoes.setEnabled(false);
-        MenuRelatorio.add(menuFuncoes);
 
         jMenuBar1.add(MenuRelatorio);
 
@@ -223,11 +227,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jdpprincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jdpprincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jdpprincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+            .add(jdpprincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -235,19 +239,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCargoActionPerformed
-        Cargos obj = new Cargos();
+        CadastroCargos obj = new CadastroCargos();
         jdpprincipal.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_menuCargoActionPerformed
 
     private void menuFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncionarioActionPerformed
-        Funcionarios obj = new Funcionarios();
+        CadastroFuncionarios obj = new CadastroFuncionarios();
         jdpprincipal.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_menuFuncionarioActionPerformed
 
     private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
-        Usuario obj = new Usuario();
+        CadastroUsuarios obj = new CadastroUsuarios();
         jdpprincipal.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_menuUsuarioActionPerformed
@@ -268,22 +272,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuFecharActionPerformed
 
     private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
-        Sobre obj = new Sobre();
+        TelaSobre obj = new TelaSobre();
         jdpprincipal.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_menuSobreActionPerformed
 
     private void menuGeralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGeralActionPerformed
-        Geral g = new Geral();
+        RelatorioGeral g = new RelatorioGeral();
         jdpprincipal.add(g);
         g.setVisible(true);
     }//GEN-LAST:event_menuGeralActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Pagamentos p = new Pagamentos();
+    private void menuAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendarActionPerformed
+        CadastroPagamentos p = new CadastroPagamentos();
         jdpprincipal.add(p);
         p.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuAgendarActionPerformed
+
+    private void menuPagamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPagamentosActionPerformed
+        RelatorioPagamentos rp = new RelatorioPagamentos();
+        jdpprincipal.add(rp);
+        rp.setVisible(true);
+    }//GEN-LAST:event_menuPagamentosActionPerformed
+
+    private void menuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncionariosActionPerformed
+        RelatorioFuncionarios rf = new RelatorioFuncionarios();
+        jdpprincipal.add(rf);
+        rf.setVisible(true);
+    }//GEN-LAST:event_menuFuncionariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,22 +341,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuArquivo;
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenu MenuConfig;
+    private javax.swing.JMenu MenuPagamento;
     private javax.swing.JMenu MenuRelatorio;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane jdpprincipal;
+    private javax.swing.JMenuItem menuAgendar;
     private javax.swing.JMenuItem menuBancoDeDados;
     private javax.swing.JMenuItem menuCargo;
     private javax.swing.JMenuItem menuConfigGeral;
     private javax.swing.JMenuItem menuFechar;
     private javax.swing.JMenuItem menuFuncionario;
     private javax.swing.JMenuItem menuFuncionarios;
-    private javax.swing.JMenuItem menuFuncoes;
     private javax.swing.JMenuItem menuGeral;
     private javax.swing.JMenuItem menuLogin;
     private javax.swing.JMenuItem menuPagamentos;
+    private javax.swing.JMenuItem menuProcessar;
     private javax.swing.JMenuItem menuSair;
     private javax.swing.JMenuItem menuSobre;
     private javax.swing.JMenuItem menuUsuario;

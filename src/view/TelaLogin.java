@@ -40,6 +40,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login no PayCash");
         setResizable(false);
 
         txt_login.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
