@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -59,6 +61,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jdpprincipal = new javax.swing.JDesktopPane();
+        bg_logo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuArquivo = new javax.swing.JMenu();
         menuLogin = new javax.swing.JMenuItem();
@@ -83,19 +86,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PayCash - Sistema de Pagamentos");
+        setPreferredSize(new java.awt.Dimension(1024, 768));
 
         jdpprincipal.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
-        jdpprincipal.setPreferredSize(new java.awt.Dimension(800, 600));
+        jdpprincipal.setPreferredSize(new java.awt.Dimension(1024, 768));
+
+        bg_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cash-payment2.png"))); // NOI18N
+        bg_logo.setOpaque(true);
+
+        jdpprincipal.setLayer(bg_logo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout jdpprincipalLayout = new org.jdesktop.layout.GroupLayout(jdpprincipal);
         jdpprincipal.setLayout(jdpprincipalLayout);
         jdpprincipalLayout.setHorizontalGroup(
             jdpprincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 800, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jdpprincipalLayout.createSequentialGroup()
+                .addContainerGap(574, Short.MAX_VALUE)
+                .add(bg_logo))
         );
         jdpprincipalLayout.setVerticalGroup(
             jdpprincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 600, Short.MAX_VALUE)
+            .add(jdpprincipalLayout.createSequentialGroup()
+                .add(298, 298, 298)
+                .add(bg_logo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MenuArquivo.setText("Arquivo");
@@ -231,7 +244,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jdpprincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jdpprincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
         );
 
         pack();
@@ -327,6 +340,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -343,6 +359,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuConfig;
     private javax.swing.JMenu MenuPagamento;
     private javax.swing.JMenu MenuRelatorio;
+    private javax.swing.JLabel bg_logo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JDesktopPane jdpprincipal;
     private javax.swing.JMenuItem menuAgendar;

@@ -24,7 +24,7 @@ public class CadastroFuncionarios extends javax.swing.JInternalFrame {
     String action = "Padrao";
     
     public CadastroFuncionarios() {
-        initComponents();
+        initComponents();        
         LoadTableFunc();
         LoadCBCargo();
         Botoes(true, false, false, false, false);
