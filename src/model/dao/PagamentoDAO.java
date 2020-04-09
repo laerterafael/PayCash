@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.Cargo;
 import model.Funcionario;
 import model.Pagamento;
 
@@ -51,8 +52,11 @@ public class PagamentoDAO {
     }
     
     public List<Pagamento> read() {
-        String sql = "SELECT p.id AS id, valor, data, status, p.funcionario_id AS funcionario_id, f.id AS fid, f.codigo AS fcodigo, f.nome AS fnome, f.sexo AS sexo, f.cpf AS cpf, f.rg AS rg, f.data_nasc AS data_nasc, f.telefone AS telefone, f.salario AS salario \n" +
-" from pagamento p INNER JOIN funcionario f ON f.id = p.funcionario_id";
+//        String sql = "SELECT p.id AS id, valor, data, status, p.funcionario_id AS funcionario_id, f.id AS fid, f.codigo AS fcodigo, f.nome AS fnome, f.sexo AS sexo, f.cpf AS cpf, f.rg AS rg, f.data_nasc AS data_nasc, f.telefone AS telefone, f.salario AS salario \n" +
+//" from pagamento p INNER JOIN funcionario f ON f.id = p.funcionario_id";
+        String sql = "SELECT p.id AS id, valor, data, status, p.funcionario_id AS funcionario_id, f.id AS fid, f.codigo AS fcodigo, f.nome AS fnome, f.sexo AS sexo, f.cpf AS cpf, f.rg AS rg, \n" +
+"f.data_nasc AS data_nasc, f.telefone AS telefone, f.salario AS salario, f.cargo_id AS fcargo_id, c.id AS cid, c.codigo AS ccodigo, c.nome AS cnome \n" +
+"from pagamento p INNER JOIN funcionario f ON f.id = p.funcionario_id INNER JOIN cargo c ON c.id = f.cargo_id";
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -81,6 +85,12 @@ public class PagamentoDAO {
                 funcionario.setTelefone(rs.getString("telefone"));
                 funcionario.setSalario(rs.getDouble("salario"));
                 
+                Cargo cargo = new Cargo();
+                cargo.setId(rs.getInt("cid"));
+                cargo.setCodigo(rs.getInt("ccodigo"));
+                cargo.setNome(rs.getString("cnome"));
+                
+                funcionario.setCargo(cargo);                                
                 pagamento.setFuncionario(funcionario);
                 
                 pagamentos.add(pagamento);
@@ -95,7 +105,7 @@ public class PagamentoDAO {
         return pagamentos;
 
     }
-    
+            
     public void update(Pagamento p){
         String sql = "UPDATE pagamento SET valor = ?, data = ?, status = ?, funcionario_id = ? WHERE id = ?";
         PreparedStatement stmt = null;
@@ -135,5 +145,37 @@ public class PagamentoDAO {
         }finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+    }
+    
+    public List<Pagamento> findAll() {
+        String sql = "SELECT * FROM pagamento";
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<Pagamento> pagamentos = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Pagamento pagamento = new Pagamento();
+                pagamento.setId(rs.getInt("id"));
+                pagamento.setValor(rs.getDouble("valor"));
+                pagamento.setData(rs.getDate("data"));
+                pagamento.setStatus(rs.getInt("status"));
+                
+                pagamentos.add(pagamento);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ler dados do cargo:" +ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return pagamentos;
     }
 }
