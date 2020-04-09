@@ -18,7 +18,7 @@ import model.dao.PagamentoDAO;
  *
  * @author laert
  */
-public class Pagamentos extends javax.swing.JInternalFrame {
+public class CadastroPagamentos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Pagamentos
@@ -26,7 +26,7 @@ public class Pagamentos extends javax.swing.JInternalFrame {
     
     String action = "Padrao";
     
-    public Pagamentos() {
+    public CadastroPagamentos() {
         initComponents();
         LoadTablePagamentos();
         LoadCBFunc();
@@ -120,7 +120,7 @@ public class Pagamentos extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Status:");
 
-        cb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "1 - Agendado", "2 - Realizado", "3 - Pendente" }));
+        cb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "1 - Realizado", "2 - Agendado", "3 - Pendente" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -322,7 +322,21 @@ public class Pagamentos extends javax.swing.JInternalFrame {
             txt_valor.setText(tbl_pagamentos.getValueAt(tbl_pagamentos.getSelectedRow(),1).toString());
             jdate.setDate(Date.valueOf(tbl_pagamentos.getValueAt(tbl_pagamentos.getSelectedRow(), 2).toString()));
             cb_func.getModel().setSelectedItem(tbl_pagamentos.getValueAt(tbl_pagamentos.getSelectedRow(),3));
-            cb_status.setSelectedIndex(Integer.parseInt(tbl_pagamentos.getValueAt(tbl_pagamentos.getSelectedRow(), 4).toString()));
+            
+            String status = tbl_pagamentos.getValueAt(tbl_pagamentos.getSelectedRow(), 4).toString();
+            switch (status) {
+                case "Realizado":
+                    cb_status.setSelectedIndex(1);
+                    break;
+                case "Agendado":
+                    cb_status.setSelectedIndex(2);
+                    break;
+                case "Pendente":
+                    cb_status.setSelectedIndex(3);
+                    break;
+                default:
+                    break;
+            }
             
         }
         
@@ -355,13 +369,26 @@ public class Pagamentos extends javax.swing.JInternalFrame {
         PagamentoDAO pdao = new PagamentoDAO();
 
         for (Pagamento p: pdao.read()) {
+            String status = "";
+            switch (p.getStatus()) {
+                case 1:
+                    status = "Realizado";
+                    break;
+                case 2:
+                    status = "Agendado";
+                    break;
+                case 3:
+                    status = "Pendente";
+                    break;
+                default:
+                    break;
+            }
             modelo.addRow(new Object[]{
                 p.getId(),
                 p.getValor(),
                 p.getData(),
                 p.getFuncionario(),
-                p.getStatus()
-                
+                status                
             });
 
         }

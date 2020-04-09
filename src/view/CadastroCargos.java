@@ -15,14 +15,14 @@ import model.dao.CargoDAO;
  *
  * @author laert
  */
-public class Cargos extends javax.swing.JInternalFrame {
+public class CadastroCargos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastroCargos
      */
     String action = "Padrao";
     
-    public Cargos() {
+    public CadastroCargos() {
         initComponents();
 //        DefaultTableModel modelo = (DefaultTableModel) tbl_cargo.getModel();
 //        tbl_cargo.setRowSorter(new TableRowSorter(modelo));

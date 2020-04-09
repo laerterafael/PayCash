@@ -16,14 +16,14 @@ import model.dao.FuncionarioDAO;
  *
  * @author laert
  */
-public class Funcionarios extends javax.swing.JInternalFrame {
+public class CadastroFuncionarios extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastroFuncionarios
      */
     String action = "Padrao";
     
-    public Funcionarios() {
+    public CadastroFuncionarios() {
         initComponents();
         LoadTableFunc();
         LoadCBCargo();
@@ -70,7 +70,6 @@ public class Funcionarios extends javax.swing.JInternalFrame {
         txt_func_salario = new javax.swing.JTextField();
 
         setClosable(true);
-        setMaximizable(true);
         setTitle("Cadastrar Funcionários");
 
         tbl_func.setModel(new javax.swing.table.DefaultTableModel(
@@ -359,7 +358,6 @@ public class Funcionarios extends javax.swing.JInternalFrame {
         txt_func_data_nascimento.setEnabled(action);
         txt_func_telefone.setEnabled(action);
         txt_func_salario.setEnabled(action);
-        bg_sexo.clearSelection();
         rb_fem.setEnabled(action);
         rb_masc.setEnabled(action);
         cb_cargo.setEnabled(action);
@@ -471,7 +469,7 @@ public class Funcionarios extends javax.swing.JInternalFrame {
         txt_func_data_nascimento.setText("");
         txt_func_telefone.setText("");
         txt_func_salario.setText("");
-        
+        cb_cargo.setSelectedIndex(0);
         bg_sexo.clearSelection();
         LoadTableFunc();
         Botoes(true, false, false, false, false);
@@ -486,6 +484,7 @@ public class Funcionarios extends javax.swing.JInternalFrame {
         txt_func_data_nascimento.setText("");
         txt_func_telefone.setText("");
         txt_func_salario.setText("");
+        cb_cargo.setSelectedIndex(0);
         bg_sexo.clearSelection();
         Botoes(true, false, false, false, false);
         Campos(false);
