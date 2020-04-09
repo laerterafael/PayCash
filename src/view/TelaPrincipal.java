@@ -86,12 +86,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PayCash - Sistema de Pagamentos");
-        setPreferredSize(new java.awt.Dimension(1024, 768));
 
         jdpprincipal.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
         jdpprincipal.setPreferredSize(new java.awt.Dimension(1024, 768));
 
-        bg_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cash-payment2.png"))); // NOI18N
+        bg_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cash-payment-logo.png"))); // NOI18N
         bg_logo.setOpaque(true);
 
         jdpprincipal.setLayer(bg_logo, javax.swing.JLayeredPane.DEFAULT_LAYER);
