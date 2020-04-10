@@ -6,10 +6,6 @@
 package view;
 
 import java.text.MessageFormat;
-import java.awt.print.*;
-import javax.print.attribute.Attribute;
-import javax.print.attribute.PrintRequestAttribute;
-import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

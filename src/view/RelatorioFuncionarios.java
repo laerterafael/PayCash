@@ -6,7 +6,6 @@
 package view;
 
 import java.text.MessageFormat;
-import java.awt.print.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
